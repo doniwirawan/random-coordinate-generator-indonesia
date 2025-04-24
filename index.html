@@ -6,151 +6,10 @@
     <title>Indonesia Coordinate Generator</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        .container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #d32f2f;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .map-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        #leaflet-map {
-            width: 100%;
-            height: 100%;
-            background-color: #e8f5e9;
-        }
-        .controls {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .input-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .input-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        .island-selection {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 10px 0;
-        }
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        label {
-            font-weight: bold;
-            min-width: 100px;
-        }
-        button {
-            background-color: #d32f2f;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #b71c1c;
-        }
-        .output {
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 15px;
-        }
-        .coordinate-display {
-            font-family: monospace;
-            font-size: 16px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .coord-text {
-            flex-grow: 1;
-        }
-        .copy-btn {
-            background-color: #2e7d32;
-            padding: 5px 10px;
-            font-size: 14px;
-        }
-        .copy-btn:hover {
-            background-color: #1b5e20;
-        }
-        .maps-btn {
-            background-color: #1565c0;
-            padding: 5px 10px;
-            font-size: 14px;
-            margin-left: 5px;
-        }
-        .maps-btn:hover {
-            background-color: #0d47a1;
-        }
-        .locate-btn {
-            background-color: #6a1b9a;
-            padding: 5px 10px;
-            font-size: 14px;
-            margin-left: 5px;
-        }
-        .locate-btn:hover {
-            background-color: #4a148c;
-        }
-        .info {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-        .history {
-            margin-top: 20px;
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-        }
-        .history-item {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .history-item:hover {
-            background-color: #f0f0f0;
         }
         .indonesia-flag {
             display: inline-block;
@@ -161,134 +20,99 @@
             vertical-align: middle;
             border: 1px solid #ddd;
         }
-        .button-group {
-            display: flex;
-            gap: 5px;
-        }
-        .island-label {
-            font-weight: normal;
-            min-width: auto;
-        }
-        .island-toggle {
-            margin-right: 5px;
-        }
-        .toggle-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .toggle-btn {
-            background-color: #757575;
-            padding: 5px 10px;
-            font-size: 14px;
-        }
-        .toggle-btn:hover {
-            background-color: #616161;
-        }
-        @media (max-width: 600px) {
-            .input-group, .input-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .coordinate-display {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .button-group {
-                margin-top: 5px;
-            }
-        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1><span class="indonesia-flag"></span>Indonesia Coordinate Generator</h1>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-6 bg-white rounded-lg shadow-md my-4 md:my-4 sm:my-0">
+        <h1 class="text-2xl font-bold text-red-600 text-center mb-6">
+            <span class="indonesia-flag"></span>Indonesia Coordinate Generator
+        </h1>
         
-        <div class="map-container">
-            <div id="leaflet-map"></div>
+        <div class="relative w-full h-96 border border-gray-300 rounded-lg overflow-hidden mb-6">
+            <div id="leaflet-map" class="w-full h-full bg-green-100"></div>
         </div>
         
-        <div class="controls">
-            <div class="input-row">
-                <div class="input-group">
-                    <label for="num-coords">Number of coordinates:</label>
-                    <input type="number" id="num-coords" min="1" max="100" value="1">
+        <div class="space-y-6">
+            <div class="flex flex-wrap gap-4">
+                <div class="flex items-center gap-2">
+                    <label for="num-coords" class="font-semibold">Number of coordinates:</label>
+                    <input type="number" id="num-coords" min="1" max="100" value="1" class="border border-gray-300 rounded px-2 py-1">
                 </div>
-                <div class="input-group">
-                    <button id="generate-btn">Generate Coordinates</button>
+                <button id="generate-btn" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Generate Coordinates</button>
+            </div>
+            
+            <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                <label class="font-semibold block mb-2">Select Islands:</label>
+                <div class="flex gap-4 mb-4"></div>
+                    <button id="select-all-btn" class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">Select All</button>
+                    <button id="select-none-btn" class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">Select None</button>
+                </div>
+                <div id="island-checkboxes" class="">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="sumatra" class="island-toggle" checked>
+                            <label for="sumatra" class="font-medium">Sumatra</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="java" class="island-toggle" checked>
+                            <label for="java" class="font-medium">Java</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="bali" class="island-toggle" checked>
+                            <label for="bali" class="font-medium">Bali</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="ntb" class="island-toggle" checked>
+                            <label for="ntb" class="font-medium">Nusa Tenggara Barat</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="ntt" class="island-toggle" checked>
+                            <label for="ntt" class="font-medium">Nusa Tenggara Timur</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="kalimantan" class="island-toggle" checked>
+                            <label for="kalimantan" class="font-medium">Kalimantan (Borneo)</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="sulawesi" class="island-toggle" checked>
+                            <label for="sulawesi" class="font-medium">Sulawesi (Celebes)</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="maluku" class="island-toggle" checked>
+                            <label for="maluku" class="font-medium">Maluku</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="halmahera" class="island-toggle" checked>
+                            <label for="halmahera" class="font-medium">Halmahera</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="papua" class="island-toggle" checked>
+                            <label for="papua" class="font-medium">Papua</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="small-islands" class="island-toggle" checked>
+                            <label for="small-islands" class="font-medium">Small Islands</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="island-selection">
-            <label>Select Islands:</label>
-            <div class="toggle-buttons">
-                <button id="select-all-btn" class="toggle-btn">Select All</button>
-                <button id="select-none-btn" class="toggle-btn">Select None</button>
-            </div>
-            <div id="island-checkboxes" class="island-checkboxes">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="sumatra" class="island-toggle" checked>
-                    <label for="sumatra" class="island-label">Sumatra</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="java" class="island-toggle" checked>
-                    <label for="java" class="island-label">Java</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="bali" class="island-toggle" checked>
-                    <label for="bali" class="island-label">Bali</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="ntb" class="island-toggle" checked>
-                    <label for="ntb" class="island-label">Nusa Tenggara Barat</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="ntt" class="island-toggle" checked>
-                    <label for="ntt" class="island-label">Nusa Tenggara Timur</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="kalimantan" class="island-toggle" checked>
-                    <label for="kalimantan" class="island-label">Kalimantan (Borneo)</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="sulawesi" class="island-toggle" checked>
-                    <label for="sulawesi" class="island-label">Sulawesi (Celebes)</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="maluku" class="island-toggle" checked>
-                    <label for="maluku" class="island-label">Maluku</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="halmahera" class="island-toggle" checked>
-                    <label for="halmahera" class="island-label">Halmahera</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="papua" class="island-toggle" checked>
-                    <label for="papua" class="island-label">Papua</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="small-islands" class="island-toggle" checked>
-                    <label for="small-islands" class="island-label">Small Islands</label>
-                </div>
-            </div>
-        </div>
-
-            
-            <div class="output">
-                <h3>Generated Coordinates:</h3>
-                <div id="coordinates-output"></div>
-                <button id="copy-all-btn" class="copy-btn">Copy All Coordinates</button>
+            <div class="bg-gray-50 border border-gray-300 rounded-lg p-4 my-4">
+                <h3 class="font-semibold mb-2">Generated Coordinates:</h3>
+                <div id="coordinates-output" class="space-y-2"></div>
+                <button id="copy-all-btn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mt-4">Copy All Coordinates</button>
             </div>
             
-            <div class="history">
-                <h3>History:</h3>
-                <div id="history-list"></div>
+            <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                <h3 class="font-semibold mb-2">History:</h3>
+                <div id="history-list" class="max-h-48 overflow-y-auto space-y-2"></div>
             </div>
-        </div>
-        
-        <div class="info">
+            <div class="text-sm text-gray-600 mt-6 "></div>
             <p>This tool generates random coordinates within Indonesia's territorial boundaries. You can select specific islands to generate coordinates from.</p>
         </div>
+        </div>
+        
+        
     </div>
 
     <!-- Leaflet JS -->
@@ -587,18 +411,18 @@
                     marker.bindPopup(`<b>Point ${i + 1}</b><br>${lat}, ${lng}<br>Island: ${coord.island}`);
                     
                     const coordDiv = document.createElement('div');
-                    coordDiv.className = 'coordinate-display';
+                    coordDiv.className = 'coordinate-display bg-gray-50 border border-gray-300 rounded-lg p-3 mb-2 shadow-sm';
                     
                     const coordText = document.createElement('div');
-                    coordText.className = 'coord-text';
+                    coordText.className = 'coord-text font-medium text-gray-800';
                     coordText.textContent = `${i + 1}. ${coord.latitude}, ${coord.longitude} (${coord.island})`;
                     coordDiv.appendChild(coordText);
                     
                     const buttonGroup = document.createElement('div');
-                    buttonGroup.className = 'button-group';
+                    buttonGroup.className = 'button-group flex gap-2 mt-2';
                     
                     const copyBtn = document.createElement('button');
-                    copyBtn.className = 'copy-btn';
+                    copyBtn.className = 'copy-btn bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700';
                     copyBtn.textContent = 'Copy';
                     copyBtn.addEventListener('click', () => {
                         navigator.clipboard.writeText(`${coord.latitude}, ${coord.longitude}`);
@@ -609,7 +433,7 @@
                     });
                     
                     const mapsBtn = document.createElement('button');
-                    mapsBtn.className = 'maps-btn';
+                    mapsBtn.className = 'maps-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700';
                     mapsBtn.textContent = 'Google Maps';
                     mapsBtn.addEventListener('click', () => {
                         const mapsUrl = createGoogleMapsUrl(coord.latitude, coord.longitude);
@@ -617,7 +441,7 @@
                     });
                     
                     const locateBtn = document.createElement('button');
-                    locateBtn.className = 'locate-btn';
+                    locateBtn.className = 'locate-btn bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700';
                     locateBtn.textContent = 'Show on Map';
                     locateBtn.addEventListener('click', () => {
                         map.setView([lat, lng], 12);
@@ -685,6 +509,7 @@
                 
                 if (coordinateHistory.length === 0) {
                     const emptyMsg = document.createElement('div');
+                    emptyMsg.className = 'text-gray-500 text-center py-4';
                     emptyMsg.textContent = 'No history yet. Generate coordinates to see them here.';
                     historyList.appendChild(emptyMsg);
                     return;
@@ -692,7 +517,7 @@
                 
                 coordinateHistory.forEach((entry, index) => {
                     const historyItem = document.createElement('div');
-                    historyItem.className = 'history-item';
+                    historyItem.className = 'history-item bg-white border border-gray-300 rounded-lg p-3 mb-2 shadow-sm hover:bg-gray-100 cursor-pointer';
                     
                     const coordCount = entry.coordinates.length;
                     
@@ -723,18 +548,18 @@
                             marker.bindPopup(`<b>Point ${i + 1}</b><br>${lat}, ${lng}<br>Island: ${coord.island}`);
                             
                             const coordDiv = document.createElement('div');
-                            coordDiv.className = 'coordinate-display';
+                            coordDiv.className = 'coordinate-display bg-gray-50 border border-gray-300 rounded-lg p-3 mb-2 shadow-sm';
                             
                             const coordText = document.createElement('div');
-                            coordText.className = 'coord-text';
+                            coordText.className = 'coord-text font-medium text-gray-800';
                             coordText.textContent = `${i + 1}. ${coord.latitude}, ${coord.longitude} (${coord.island})`;
                             coordDiv.appendChild(coordText);
                             
                             const buttonGroup = document.createElement('div');
-                            buttonGroup.className = 'button-group';
+                            buttonGroup.className = 'button-group flex gap-2 mt-2';
                             
                             const copyBtn = document.createElement('button');
-                            copyBtn.className = 'copy-btn';
+                            copyBtn.className = 'copy-btn bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700';
                             copyBtn.textContent = 'Copy';
                             copyBtn.addEventListener('click', () => {
                                 navigator.clipboard.writeText(`${coord.latitude}, ${coord.longitude}`);
@@ -745,7 +570,7 @@
                             });
                             
                             const mapsBtn = document.createElement('button');
-                            mapsBtn.className = 'maps-btn';
+                            mapsBtn.className = 'maps-btn bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700';
                             mapsBtn.textContent = 'Google Maps';
                             mapsBtn.addEventListener('click', () => {
                                 const mapsUrl = createGoogleMapsUrl(coord.latitude, coord.longitude);
@@ -753,7 +578,7 @@
                             });
                             
                             const locateBtn = document.createElement('button');
-                            locateBtn.className = 'locate-btn';
+                            locateBtn.className = 'locate-btn bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700';
                             locateBtn.textContent = 'Show on Map';
                             locateBtn.addEventListener('click', () => {
                                 map.setView([lat, lng], 12);
