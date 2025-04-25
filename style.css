@@ -1,12 +1,13 @@
  body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .indonesia-flag {
-            display: inline-block;
-            width: 30px;
-            height: 20px;
-            background: linear-gradient(to bottom, #ff0000 50%, #ffffff 50%);
-            margin-right: 10px;
-            vertical-align: middle;
-            border: 1px solid #ddd;
-        }
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+ .indonesia-flag {
+     display: inline-block;
+     width: 30px;
+     height: 20px;
+     background: linear-gradient(to bottom, #ff0000 50%, #ffffff 50%);
+     margin-right: 10px;
+     vertical-align: middle;
+     border: 1px solid #ddd;
+ }

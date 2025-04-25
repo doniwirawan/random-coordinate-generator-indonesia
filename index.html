@@ -1,109 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indonesia Coordinate Generator</title>
     <!-- Leaflet CSS -->
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-gray-100 text-gray-800">
     <div class="container mx-auto p-6 bg-white rounded-lg shadow-md my-4 md:my-4 sm:my-0">
         <h1 class="text-2xl font-bold text-red-600 text-center mb-6">
             <span class="indonesia-flag"></span>Indonesia Coordinate Generator
         </h1>
-        
+
         <div class="relative w-full h-96 border border-gray-300 rounded-lg overflow-hidden mb-6">
             <div id="leaflet-map" class="w-full h-full bg-green-100"></div>
         </div>
-        
+
         <div class="space-y-6">
             <div class="flex flex-wrap gap-4">
                 <div class="flex items-center gap-2">
                     <label for="num-coords" class="font-semibold">Number of coordinates:</label>
-                    <input type="number" id="num-coords" min="1" max="100" value="1" class="border border-gray-300 rounded px-2 py-1">
+                    <input type="number" id="num-coords" min="1" max="100" value="1"
+                        class="border border-gray-300 rounded px-2 py-1">
                 </div>
-                <button id="generate-btn" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Generate Coordinates</button>
+                <button id="generate-btn" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Generate
+                    Coordinates</button>
             </div>
-            
+
             <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
                 <label class="font-semibold block mb-2">Select Islands:</label>
                 <div class="flex gap-4 mb-4"></div>
-                    <button id="select-all-btn" class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">Select All</button>
-                    <button id="select-none-btn" class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">Select None</button>
-                </div>
-                <div id="island-checkboxes" class="">
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="sumatra" class="island-toggle" checked>
-                            <label for="sumatra" class="font-medium">Sumatra</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="java" class="island-toggle" checked>
-                            <label for="java" class="font-medium">Java</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="bali" class="island-toggle" checked>
-                            <label for="bali" class="font-medium">Bali</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="ntb" class="island-toggle" checked>
-                            <label for="ntb" class="font-medium">Nusa Tenggara Barat</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="ntt" class="island-toggle" checked>
-                            <label for="ntt" class="font-medium">Nusa Tenggara Timur</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="kalimantan" class="island-toggle" checked>
-                            <label for="kalimantan" class="font-medium">Kalimantan (Borneo)</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="sulawesi" class="island-toggle" checked>
-                            <label for="sulawesi" class="font-medium">Sulawesi (Celebes)</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="maluku" class="island-toggle" checked>
-                            <label for="maluku" class="font-medium">Maluku</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="halmahera" class="island-toggle" checked>
-                            <label for="halmahera" class="font-medium">Halmahera</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="papua" class="island-toggle" checked>
-                            <label for="papua" class="font-medium">Papua</label>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="small-islands" class="island-toggle" checked>
-                            <label for="small-islands" class="font-medium">Small Islands</label>
-                        </div>
+                <button id="select-all-btn" class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">Select
+                    All</button>
+                <button id="select-none-btn" class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">Select
+                    None</button>
+            </div>
+            <div id="island-checkboxes" class="">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="sumatra" class="island-toggle" checked>
+                        <label for="sumatra" class="font-medium">Sumatra</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="java" class="island-toggle" checked>
+                        <label for="java" class="font-medium">Java</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="bali" class="island-toggle" checked>
+                        <label for="bali" class="font-medium">Bali</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="ntb" class="island-toggle" checked>
+                        <label for="ntb" class="font-medium">Nusa Tenggara Barat</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="ntt" class="island-toggle" checked>
+                        <label for="ntt" class="font-medium">Nusa Tenggara Timur</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="kalimantan" class="island-toggle" checked>
+                        <label for="kalimantan" class="font-medium">Kalimantan (Borneo)</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="sulawesi" class="island-toggle" checked>
+                        <label for="sulawesi" class="font-medium">Sulawesi (Celebes)</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="maluku" class="island-toggle" checked>
+                        <label for="maluku" class="font-medium">Maluku</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="halmahera" class="island-toggle" checked>
+                        <label for="halmahera" class="font-medium">Halmahera</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="papua" class="island-toggle" checked>
+                        <label for="papua" class="font-medium">Papua</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="small-islands" class="island-toggle" checked>
+                        <label for="small-islands" class="font-medium">Small Islands</label>
                     </div>
                 </div>
             </div>
-            
-            <div class="bg-gray-50 border border-gray-300 rounded-lg p-4 my-4">
-                <h3 class="font-semibold mb-2">Generated Coordinates:</h3>
-                <div id="coordinates-output" class="space-y-2"></div>
-                <button id="copy-all-btn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mt-4">Copy All Coordinates</button>
-            </div>
-            
-            <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
-                <h3 class="font-semibold mb-2">History:</h3>
-                <div id="history-list" class="max-h-48 overflow-y-auto space-y-2"></div>
-            </div>
-            <div class="text-sm text-gray-600 mt-6 "></div>
-            <p>This tool generates random coordinates within Indonesia's territorial boundaries. You can select specific islands to generate coordinates from.</p>
         </div>
+
+        <div class="bg-gray-50 border border-gray-300 rounded-lg p-4 my-4">
+            <h3 class="font-semibold mb-2">Generated Coordinates:</h3>
+            <div id="coordinates-output" class="space-y-2"></div>
+            <button id="copy-all-btn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mt-4">Copy All
+                Coordinates</button>
         </div>
-        
-        
+
+        <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
+            <h3 class="font-semibold mb-2">History:</h3>
+            <div id="history-list" class="max-h-48 overflow-y-auto space-y-2"></div>
+        </div>
+        <div class="text-sm text-gray-600 mt-6 "></div>
+        <p>This tool generates random coordinates within Indonesia's territorial boundaries. You can select specific
+            islands to generate coordinates from.</p>
+    </div>
+    </div>
+
+
     </div>
 
     <!-- Leaflet JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
